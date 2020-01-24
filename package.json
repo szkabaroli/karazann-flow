@@ -22,12 +22,26 @@
   "homepage": "https://github.com/szkabaroli/karazann-flow#readme",
   "bit": {
     "env": {},
-    "componentsDefaultDirectory": "components/{name}",
+    "componentsDefaultDirectory": "src/shared/{name}",
     "packageManager": "npm"
   },
   "devDependencies": {
+    "@types/convict": "^4.2.1",
+    "@types/js-yaml": "^3.12.1",
+    "@types/node": "^13.5.0",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "convict": "^5.2.0",
+    "js-yaml": "^3.13.1",
+    "kafkajs": "^1.11.0",
+    "pg": "^7.17.1",
+    "reflect-metadata": "^0.1.13",
+    "typedi": "^0.8.0",
+    "typeorm": "^0.2.22",
+    "winston": "^3.2.1",
+    "@bit/szkabaroli.karazann-shared.flow": "file:./src/shared/flow"
   }
 }

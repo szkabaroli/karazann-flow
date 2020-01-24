@@ -1,0 +1,13 @@
+application:
+  env: development
+
+postgres:
+  database: 'karazann-dev'
+  host: '127.0.0.1'
+  port: 5432
+  user: 'postgres'
+  password: 'root'
+
+kafka:
+  brokers: 
+    - 'localhost:9092'
