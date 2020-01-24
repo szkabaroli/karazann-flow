@@ -1,0 +1,33 @@
+{
+  "name": "karazann-flow",
+  "version": "1.0.0-alpha",
+  "description": "Flow background processor.",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "ts-node src",
+    "start": "node dist",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szkabaroli/karazann-flow.git"
+  },
+  "keywords": [],
+  "author": "Roland Sz. Kovacs <szkabaroli@gmail.com> (karazann.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szkabaroli/karazann-flow/issues"
+  },
+  "homepage": "https://github.com/szkabaroli/karazann-flow#readme",
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
+  },
+  "devDependencies": {
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.5"
+  }
+}
