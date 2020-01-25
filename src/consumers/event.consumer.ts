@@ -30,16 +30,11 @@ export class EventConsumer {
         const parsedKey = JSON.parse(message.key.toString()).payload
         const parsedValue: IOutboxEventValue = JSON.parse(message.value.toString()).payload
 
-        const prefix = `${topic}[${partition} | ${message.offset}] / ${message.timestamp}`
-        logger.info(`${prefix} ${parsedKey}#${parsedValue}`)
-
-        console.log(parsedValue)
-
         // Stage #1: Check is trigger exist
         const trigger = await this.eventService.getTrigger(parsedValue.eventType, JSON.parse(parsedValue.payload).ref)
         
         // Stage #2: If exist process the flow
-        if (trigger) this.flowService.process(trigger[0])
+        if (trigger) this.flowService.process(trigger[0].flowId)
 
         // Stage #3: Commit the offset. The event is processed. Regardles this is a trrigger or not.
         await consumer.commitOffsets([{ topic, partition, offset: `${Number(message.offset) + 1}` }])

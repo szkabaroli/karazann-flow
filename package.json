@@ -1,47 +1,49 @@
 {
-  "name": "karazann-flow",
-  "version": "1.0.0-alpha",
-  "description": "Flow background processor.",
-  "main": "index.js",
-  "scripts": {
-    "start:dev": "ts-node src",
-    "start": "node dist",
-    "clean": "rm -rf dist",
-    "build": "npm run clean && tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/szkabaroli/karazann-flow.git"
-  },
-  "keywords": [],
-  "author": "Roland Sz. Kovacs <szkabaroli@gmail.com> (karazann.com)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/szkabaroli/karazann-flow/issues"
-  },
-  "homepage": "https://github.com/szkabaroli/karazann-flow#readme",
-  "bit": {
-    "env": {},
-    "componentsDefaultDirectory": "src/shared/{name}",
-    "packageManager": "npm"
-  },
-  "devDependencies": {
-    "@types/convict": "^4.2.1",
-    "@types/js-yaml": "^3.12.1",
-    "@types/node": "^13.5.0",
-    "tslint": "^6.0.0",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.7.5"
-  },
-  "dependencies": {
-    "convict": "^5.2.0",
-    "js-yaml": "^3.13.1",
-    "kafkajs": "^1.11.0",
-    "pg": "^7.17.1",
-    "reflect-metadata": "^0.1.13",
-    "typedi": "^0.8.0",
-    "typeorm": "^0.2.22",
-    "winston": "^3.2.1",
-    "@bit/szkabaroli.karazann-shared.flow": "file:./src/shared/flow"
-  }
+    "name": "karazann-flow",
+    "version": "1.0.0-alpha",
+    "description": "Flow background processor.",
+    "main": "index.js",
+    "scripts": {
+        "start:dev": "ts-node src",
+        "start": "node dist",
+        "clean": "rm -rf dist",
+        "build": "npm run clean && tsc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/szkabaroli/karazann-flow.git"
+    },
+    "keywords": [],
+    "author": "Roland Sz. Kovacs <szkabaroli@gmail.com> (karazann.com)",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/szkabaroli/karazann-flow/issues"
+    },
+    "homepage": "https://github.com/szkabaroli/karazann-flow#readme",
+    "bit": {
+        "env": {},
+        "componentsDefaultDirectory": "src/shared/{name}",
+        "packageManager": "npm",
+        "defaultScope": "szkabaroli.karazann-shared"
+    },
+    "devDependencies": {
+        "@types/convict": "^4.2.1",
+        "@types/js-yaml": "^3.12.1",
+        "@types/node": "^13.5.0",
+        "tslint": "^6.0.0",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^3.7.5"
+    },
+    "dependencies": {
+        "convict": "^5.2.0",
+        "js-yaml": "^3.13.1",
+        "kafkajs": "^1.11.0",
+        "pg": "^7.17.1",
+        "reflect-metadata": "^0.1.13",
+        "typedi": "^0.8.0",
+        "typeorm": "^0.2.22",
+        "winston": "^3.2.1",
+        "@bit/szkabaroli.karazann-shared.flow": "file:./src/shared/flow",
+        "@bit/szkabaroli.karazann-shared.nodes": "file:./src/shared/nodes"
+    }
 }

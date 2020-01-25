@@ -1,0 +1,15 @@
+{
+  "name": "@bit/szkabaroli.karazann-shared.nodes",
+  "version": "0.1.1",
+  "homepage": "https://bit.dev/szkabaroli/karazann-shared/nodes",
+  "main": "index.ts",
+  "dependencies": {
+    "@bit/szkabaroli.karazann-shared.flow": "file:../flow"
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "license": "SEE LICENSE IN LICENSE",
+  "bit": {
+    "env": {}
+  }
+}

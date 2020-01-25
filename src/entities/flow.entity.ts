@@ -12,9 +12,6 @@ export class Flow extends BaseEntity {
     @Column('varchar', { name: 'name' })
     name: string
 
-    @Column('jsonb', { name: 'triggers' })
-    triggers: any
-
     @Column('jsonb', { name: 'nodes' })
     nodes: any
 

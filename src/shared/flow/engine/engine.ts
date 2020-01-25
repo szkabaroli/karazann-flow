@@ -4,8 +4,28 @@ import { PinType } from '../pin'
 import { Context } from '../core/context'
 import { IData } from '../interfaces'
 
+interface ILogger { 
+    log(...args:any): any
+    debug(...args:any): any
+    info(...args:any): any
+    error(...args:any): any
+    warn(...args:any): any
+    emerg(...args: any): any
+    profile(...args: any): any
+}
+
+interface EngineOptions { 
+    logger: ILogger
+}
+
 export class FlowEngine extends Context {
+    private logger: ILogger
     nodes: Map<number, Node> = new Map()
+    
+    constructor(private options: EngineOptions) {
+        super()
+        this.logger = options.logger
+    }
 
     extractInputData(node: Node) {
         const inputData: InputsData = {}
@@ -22,7 +42,7 @@ export class FlowEngine extends Context {
 
                         inputData[c.output.key] = output
                     } else {
-                        console.debug('node not yet porcessed')
+                        this.logger.debug('node not yet porcessed')
                     }
                 })
             }
@@ -31,7 +51,7 @@ export class FlowEngine extends Context {
     }
 
     async startPorcessing(json: IData, nodeId: number, onlyBuild: boolean) {
-        console.time('buildFlow')
+        this.logger.profile('buildFlow')
         // Build the node tree from json representation
         for (const [key, value] of Object.entries(json.nodes)) {
             const b = this.builders.get(value.builderName)!
@@ -52,9 +72,9 @@ export class FlowEngine extends Context {
                 })
             }
         }
-        console.timeEnd('buildFlow')
+        this.logger.profile('buildFlow')
 
-        console.time('analyzeFlow')
+        this.logger.profile('analyzeFlow')
         let triggers = 0
         let action = 0
         let control = 0
@@ -76,16 +96,16 @@ export class FlowEngine extends Context {
                     break
             }
         }
-        console.timeEnd('analyzeFlow')
-        console.debug('triggers:', triggers)
-        console.debug('action:', action)
-        console.debug('control:', control)
-        console.debug('data:', data)
+        this.logger.profile('analyzeFlow')
+        this.logger.debug(`triggers: ${triggers}`)
+        this.logger.debug(`action: ${action}`)
+        this.logger.debug(`control: ${control}`)
+        this.logger.debug(`data: ${data}`)
 
 
-        console.time('processFlow')
+        this.logger.profile('processFlow', { level: 'info'})
         await this.processNode(nodeId)
-        console.timeEnd('processFlow')
+        this.logger.profile('processFlow')
     }
 
     /*async processUnreachable(): Promise<void> {
@@ -107,7 +127,7 @@ export class FlowEngine extends Context {
         // Every node need to be processed once
         if (node.processed === true) return
 
-        console.debug(`[Node System]: processing node: ${node.builderName}`)
+        this.logger.debug(`[Node System]: processing node: ${node.builderName}`)
 
         // Construct input data form other node outputs
         const inputDatas: InputsData = this.extractInputData(node)
@@ -121,7 +141,7 @@ export class FlowEngine extends Context {
                     o.connections.forEach(c => {
                         const nextNodeId = (c.input.node as Node).id as number
                         flowControls[o.key] = async () => {
-                            console.debug(`[Node System] flowing to: ${nextNodeId}`)
+                            this.logger.debug(`[Node System] flowing to: ${nextNodeId}`)
                             await this.processNode(nextNodeId)
                         }
                     })
@@ -141,7 +161,7 @@ export class FlowEngine extends Context {
         const builder = this.builders.get(node.builderName)
         if (!builder) throw new Error('Builder not registered')
 
-        console.debug(`[Node System] working on: ${node.builderName}`)
+        this.logger.debug(`[Node System] working on: ${node.builderName}`)
         // console.debug(inputData, n.outputData)
         await builder.worker(node, inputDatas, node.outputDatas, flowControls)
     }
